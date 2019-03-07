@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">NewTest</string>
+    <string name="action_settings">Settings</string>
+    <string name="escrba_altura">Escriba aca la altura</string>
+    <string name="escrba_Encargado">Escriba el nombre del encargado</string>
+    <string name="escrba_checkeo">Escriba la última fecha de revisión</string>
+    <string name="escrba_siembra">Escriba la fecha de siembra</string>
+</resources>

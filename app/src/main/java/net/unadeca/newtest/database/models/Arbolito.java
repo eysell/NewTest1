@@ -30,6 +30,7 @@ public class Arbolito extends BaseModel {
 
 
     public String toString(){
-        return String.format(Locale.getDefault(), "altura: %d\nfecha_plantado: %d\nEncargado: %s", this.altura, this.fecha_plantado, this.plantado_por);
+        return String.format(Locale.getDefault(), "altura: %d\nfecha_plantado: " +
+                "%s\nEncargado: %s", this.altura, this.fecha_plantado, this.plantado_por);
     }
 }

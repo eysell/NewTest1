@@ -1,5 +1,6 @@
 package net.unadeca.newtest.activities;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
@@ -13,8 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.raizlabs.android.dbflow.sql.language.Delete;
 import com.raizlabs.android.dbflow.sql.language.SQLite;
@@ -23,6 +30,7 @@ import net.unadeca.newtest.R;
 import net.unadeca.newtest.database.models.Arbolito;
 import net.unadeca.newtest.database.models.Arbolito_Table;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -118,12 +126,18 @@ public class MainActivity extends AppCompatActivity {
         }
         return array;
 
+        }
 
-
+    private List<Arbolito> getListArbolitos(){
+        return  SQLite.select().from(Arbolito.class).queryList();
     }
+
     //Establecemos el adaptador
     private void setAdapter(){
-        lista.setAdapter( new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getArbolitos()));
+        //Adaptador de arreglo
+      //  lista.setAdapter( new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, getArbolitos()));
+
+        lista.setAdapter(new CustomAdapter(getListArbolitos(),getApplicationContext(), view));
     }
     // mostrando un Diálogo utilzando la funconalidad de Android
     public void mostrarDialog(){
@@ -202,10 +216,14 @@ public class MainActivity extends AppCompatActivity {
         //Este se usa si queremos borrar toda la tabla
         //*Delete.table(Arbolito.class);
         //Este borra dependiendo de una consulta
-        SQLite.delete().from(Arbolito.class).where(Arbolito_Table.altura.between(1).and(10)).execute();
+        SQLite.delete().from(Arbolito.class).where(Arbolito_Table.altura.between(1).and(10
+        )).execute();
         setAdapter();
 
         Snackbar.make(view, "Hemos borrado el listado de arbolitos", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }
+
+
+
 }
